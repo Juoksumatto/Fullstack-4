@@ -1,5 +1,4 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import Blog from './blogstuff/blog.js'
 
 const app = express()
