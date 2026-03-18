@@ -1,0 +1,12 @@
+###
+post http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "likes",
+    "author": "Onni Hölttä",
+    "url": "https://github.com/Juoksumatto/Fullstack-4",
+    "likes": "2378"
+}
+###
+GET http://localhost:3003/api/blogs
