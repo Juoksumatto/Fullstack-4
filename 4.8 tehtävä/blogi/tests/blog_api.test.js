@@ -1,0 +1,50 @@
+import { test, describe, beforeEach, after, before } from 'node:test'
+import assert from 'node:assert'
+import mongoose from 'mongoose'
+import supertest from 'supertest'
+
+import config from '../src/mongod.js'
+import app from '../src/app.js'
+import Blog from '../src/blogstuff/blog.js'
+
+before(async () => {
+    await mongoose.connect(config.MONGO_URI)
+})
+
+const api = supertest(app)
+
+const initialBlogs = [
+  {
+    title: 'this a blog',
+    author: 'Onni',
+    url: 'https://github.com/Juoksumatto/Fullstack-4',
+    likes: 5
+  }
+]
+
+beforeEach(async () => {
+  await Blog.deleteMany({})
+  await Blog.insertMany(initialBlogs)
+})
+
+describe('GET /api/blogs', () => {
+
+  test('returns blogs as JSON', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returns correct amount of blogs', async () => {
+    const response = await api.get('/api/blogs')
+
+    assert.strictEqual(response.body.length, initialBlogs.length)
+  })
+
+})
+console.log('TEST DB:', config.MONGO_URI)
+
+after(async () => {
+  await mongoose.connection.close()
+}) 
