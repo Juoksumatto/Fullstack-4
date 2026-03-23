@@ -56,12 +56,20 @@ describe('GET /api/blogs', () => {
 
 })
 
+const newblog ={
+  title: 'new blog',
+  author: 'Onni',
+  url: 'https://github.com/Juoksumatto/Fullstack-4',
+  likes: 12
+}
+
 describe('POST /api/blogs', () => {
 
   test('a valid blog can be added', async () => {
+
     await api
       .post('/api/blogs')
-      .send(initialBlogs)
+      .send(newblog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
