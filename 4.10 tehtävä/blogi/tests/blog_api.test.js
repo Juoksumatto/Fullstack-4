@@ -56,12 +56,13 @@ describe('GET /api/blogs', () => {
 
 })
 
-const newblog ={
+const newblog =[
+{
   title: 'new blog',
   author: 'Onni',
   url: 'https://github.com/Juoksumatto/Fullstack-4',
   likes: 12
-}
+}]
 
 describe('POST /api/blogs', () => {
 
