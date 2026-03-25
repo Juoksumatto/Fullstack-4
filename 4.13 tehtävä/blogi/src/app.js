@@ -25,7 +25,7 @@ app.delete('/api/blogs/:_id', async (req, res) => {
     await Blog.findByIdAndDelete(req.params._id)
     res.status(204).end()
   } catch (error) {
-    res.status(400).json({ error: 'malformatted id'})
+    res.status(400).json({ error: 'wrong id'})
   }
 })
 
